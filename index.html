@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anurag Karki - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.293.0/font/lucide.css">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/9/98/Sample_User_Icon.png">
+  <style>
+    :root {
+      --bg: #19191c;
+      --fg: #fff;
+      --primary: #b693fd;
+      --card: #222226;
+      --border: #373737;
+      --accent: #8576ff;
+      --font-main: 'Montserrat', Arial, sans-serif;
+      --font-hero: 'Josefin Sans', 'Montserrat', Arial, sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0; padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-main);
+    }
+    /* HERO SECTION WITH SLIDE & FLOATING ANIMATION */
+    .hero {
+      position: relative;
+      min-height: 60vh;
+      height: 62vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('/mnt/data/1cbd86f9-6fa3-4440-bcb3-ffb7b8c7b0dc.png') center/cover no-repeat;
+      overflow: hidden;
+      animation: hero-move 9s ease-in-out infinite alternate;
+    }
+    @keyframes hero-move {
+      from { background-position: center 45%; }
+      to   { background-position: center 55%; }
+    }
+    .hero::after {
+      content: '';
+      position: absolute; left:0; top:0; right:0; bottom:0;
+      background: linear-gradient(to right, rgba(25,25,28,0.98), rgba(25,25,28,0.4) 65%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+    }
+    .hero-content h2,
+    .hero-content h1 {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 1.2s, transform 1.2s;
+    }
+    .hero-content.slidein h2,
+    .hero-content.slidein h1 {
+      opacity: 1;
+      transform: none;
+    }
+    .hero-content h2 {
+      font-size: 1.15rem;
+      font-family: var(--font-main);
+      letter-spacing: 2.5px;
+      opacity: 0.89;
+      font-weight: 400;
+      margin-bottom: 0.3em;
+    }
+    .hero-content h1 {
+      font-family: var(--font-hero);
+      font-size: 4rem;
+      margin: 0.25em 0 0.2em 0;
+      font-weight: 700;
+      letter-spacing: 2px;
+      line-height: 1.13;
+    }
+    .divider {
+      width: 280px;
+      margin: 0.9em auto 0 auto;
+      border-bottom: 1.2px solid #fff3;
+      opacity: 0.6;
+    }
+    @media (max-width: 700px) {
+      .hero-content h1 { font-size: 2.2rem; }
+      .divider { width: 140px; }
+      .hero { height: 220px; min-height: 180px; }
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 1.5em 1.5em 1.5em;
+    }
+    section {
+      margin-bottom: 2.7em;
+    }
+    /* Section Fade-In Animation */
+    .section-title, .projects-grid, .twocol, .contact-cards, .contact-form {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(.39,.13,.47,.93), transform 0.9s cubic-bezier(.39,.13,.47,.93);
+      will-change: opacity, transform;
+    }
+    .section-inview {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .section-title {
+      font-size: 2.3rem;
+      font-family: var(--font-hero);
+      color: var(--fg);
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+    /* Projects Grid */
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2em;
+      justify-content: center;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1.2em;
+      width: 310px;
+      box-shadow: 0 2px 18px #0005;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      transition: transform 0.17s, box-shadow 0.19s, border-color 0.16s;
+    }
+    .project-card:hover {
+      transform: translateY(-7px) scale(1.035) rotate(-0.6deg);
+      box-shadow: 0 8px 36px #8576ff44, 0 0 0 2.5px var(--accent);
+      border-color: var(--accent);
+    }
+    .project-image {
+      width: 100%;
+      height: 170px;
+      background: #19191c;
+      object-fit: cover;
+      display: block;
+      border-radius: 1.2em 1.2em 0 0;
+    }
+    .project-body {
+      padding: 1.2em 1em 1.3em 1em;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+    }
+    .project-title {
+      font-family: var(--font-hero);
+      font-size: 1.2em;
+      color: var(--primary);
+      margin-bottom: 0.4em;
+    }
+    .project-desc {
+      flex: 1 1 auto;
+      color: #ccc;
+      font-size: 1.01em;
+      margin-bottom: 0.9em;
+    }
+    .project-link {
+      color: var(--accent);
+      text-decoration: underline;
+      font-weight: 700;
+      font-size: 1em;
+      align-self: flex-start;
+      transition: color 0.16s;
+    }
+    .project-link:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    /* Communities/Education/Skills 2-column */
+    .twocol {
+      display: flex; gap: 2em; flex-wrap: wrap;
+      margin-bottom: 2em;
+    }
+    .twocol > div {
+      flex: 1 1 320px;
+      min-width: 260px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1em;
+      padding: 1.4em 1em 1.2em 1.3em;
+      box-shadow: 0 1px 10px #22222c15;
+      margin-bottom: 1.5em;
+      transition: box-shadow 0.22s, border-color 0.22s, transform 0.18s;
+    }
+    .twocol > div:hover {
+      box-shadow: 0 8px 34px #8576ff24, 0 0 0 2px var(--primary);
+      border-color: var(--accent);
+      transform: translateY(-2px) scale(1.01);
+    }
+    .badge {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 0.55em;
+      font-size: 0.98em;
+      font-weight: 700;
+      padding: 0.28em 0.9em;
+      margin-right: 0.6em;
+    }
+    /* Skills bar */
+    .skillsbar {
+      margin: 0.6em 0 1.2em 0;
+    }
+    .skillsbar .skill-label {
+      font-size: 1em;
+      margin-bottom: 0.3em;
+      color: #bbb;
+    }
+    .skillsbar .bar {
+      width: 100%;
+      background: #1a1a1a;
+      border-radius: 1em;
+      overflow: hidden;
+      height: 11px;
+      margin-bottom: 1.1em;
+    }
+    .skillsbar .bar-inner {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 1em 0 0 1em;
+      width: 0;
+      transition: width 1.3s cubic-bezier(.53,.02,.28,1.01);
+    }
+    /* Contact */
+    .contact-cards {
+      display: flex; gap: 2em; flex-wrap: wrap; justify-content: center; margin-bottom: 2em;
+    }
+    .contact-card {
+      flex: 1 1 240px;
+      min-width: 200px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1em;
+      text-align: center;
+      padding: 2em 1em 1.5em 1em;
+      box-shadow: 0 2px 10px #22222c12;
+      transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+    }
+    .contact-card:hover {
+      box-shadow: 0 8px 34px #8576ff24, 0 0 0 2px var(--primary);
+      border-color: var(--accent);
+      transform: translateY(-3px) scale(1.021);
+    }
+    .contact-card i {
+      font-size: 2.2em;
+      color: var(--primary);
+      margin-bottom: 0.5em;
+      display: block;
+    }
+    .contact-card a {
+      color: var(--fg);
+      font-size: 1.2em;
+      text-decoration: underline;
+      margin-bottom: 0.4em;
+      display: block;
+      transition: color 0.16s;
+    }
+    .contact-card a:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .contact-card .sub {
+      color: var(--primary);
+      font-weight: bold;
+      margin-top: 0.5em;
+      font-size: 1.06em;
+    }
+    /* Contact Form */
+    .contact-form {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: 1em;
+      border: 1px solid var(--border);
+      padding: 2em 1.2em;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1em;
+      box-shadow: 0 2px 10px #22222c10;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-form input, .contact-form textarea {
+      padding: 1em;
+      border-radius: 0.5em;
+      border: none;
+      font-size: 1em;
+      background: #181822;
+      color: #fff;
+      margin-bottom: 0.2em;
+    }
+    .contact-form textarea { min-height: 90px; resize: vertical; }
+    .contact-form button {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.8em 2em;
+      border: none;
+      border-radius: 0.6em;
+      font-size: 1.08em;
+      font-family: var(--font-main);
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 0.5em;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-form button:active::after {
+      content: '';
+      position: absolute;
+      left: 50%; top: 50%;
+      width: 0; height: 0;
+      background: rgba(255,255,255,0.27);
+      border-radius: 100%;
+      transform: translate(-50%,-50%);
+      animation: ripple 0.43s linear;
+    }
+    @keyframes ripple {
+      to { width: 250%; height: 250%; opacity: 0; }
+    }
+    .contact-form button:hover {
+      background: #b693fd;
+    }
+    footer {
+      color: #aaa;
+      text-align: center;
+      margin: 2.5em 0 1.2em 0;
+      font-size: 1.01em;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="hero-content">
+      <h2>HELLO, I AM</h2>
+      <h1>Anurag Karki</h1>
+      <div class="divider"></div>
+    </div>
+  </div>
+  <main>
+    <section>
+      <div class="section-title">My Projects</div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="images/1.png" class="project-image"/>
+          <div class="project-body">
+            <div class="project-title">Personal Expense Tracker</div>
+            <div class="project-desc">A web or CLI app to track daily expenses, categorize spending, and visualize trends using charts.
+
+            </div>
+            <a href="#" class="project-link">See more</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="images/2.png" class="project-image"/>
+          <div class="project-body">
+            <div class="project-title"> School Management System</div>
+            <div class="project-desc">A comprehensive platform to manage students, teachers, courses, timetables, attendance, grades, and communication.</div>
+            <a href="#" class="project-link">See more</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="images/3.png" class="project-image"/>
+          <div class="project-body">
+            <div class="project-title">Instagram Clone</div>
+            <div class="project-desc">A social media web app where users can create accounts, upload images, like/comment on posts, follow/unfollow users, and view timelines.</div>
+            <a href="#" class="project-link">See more</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="section-title">Education & Experience</div>
+      <div class="twocol">
+        <div>
+          <div class="badge">2021 - 2025</div>
+          <strong>BSc (Hons) Computer Systems Engineering (IT)</strong>
+          <div style="margin-top: 0.7em; color: #ccc;">ISMT Collage</div>
+        </div>
+        <div>
+          <div class="badge">Apr 2024 - Present</div>
+          <strong>IT Support Intern</strong>
+          <div style="margin-top: 0.7em; color: #ccc;">Sunrise Eng. Boa. School</div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="section-title">Communities & Coding Skills</div>
+      <div class="twocol">
+        <div>
+          <strong>Online Python Communities</strong>
+          <div class="badge">Jan 2025 - Present</div>
+          <div style="margin: 0.4em 0 1.2em 0; color: #ccc;">Post updates about my projects (screenshots, demos, challenges).</div>
+          <strong>General Developer & Open Source Communities</strong>
+          <div class="badge">March-2025 Present</div>
+          <div style="margin: 0.4em 0 0 0; color: #ccc;">Answer beginner questions</div>
+        </div>
+        <div>
+          <div class="skillsbar">
+            <div class="skill-label">MongoDB / PostgreSQL</div>
+            <div class="bar"><div class="bar-inner" data-width="10%"></div></div>
+            <div class="skill-label">Python / Django</div>
+            <div class="bar"><div class="bar-inner" data-width="30%"></div></div>
+            <div class="skill-label">JavaScript / NodeJs</div>
+            <div class="bar"><div class="bar-inner" data-width="0%"></div></div>
+            <div class="skill-label">Machine Learning</div>
+            <div class="bar"><div class="bar-inner" data-width="0%"></div></div>
+            <div class="skill-label">Ethical Hacking</div>
+            <div class="bar"><div class="bar-inner" data-width="0%"></div></div>
+            <div class="skill-label">BlockChain Development</div>
+            <div class="bar"><div class="bar-inner" data-width="0%"></div></div>
+            <div class="skill-label">Fintech Technologies</div>
+            <div class="bar"><div class="bar-inner" data-width="0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="section-title">Get in Touch</div>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <i class="lucide lucide-link"></i>
+          <a href="#">My Latest Articles</a>
+          <div class="sub">Blog</div>
+        </div>
+        <!-- <div class="contact-card">
+          <i class="lucide lucide-message-circle"></i>
+          <a href="#">@anuragkarki</a>
+          <div class="sub">Feel free to DM</div>
+        </div> -->
+        <div class="contact-card">
+          <i class="lucide lucide-mail"></i>
+          <a href="mailto:anuragkarki2004@email.com">anuragkarki2004@email.com</a>
+          <div class="sub">Email Me</div>
+        </div>
+      </div>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name *" required />
+        <input type="email" placeholder="Your Email *" required />
+        <input type="text" placeholder="Your Subject.." />
+        <textarea placeholder="Your Message..." required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Anurag Karki
+  </footer>
+  <script>
+    // Hero intro slide-in effect
+    setTimeout(() => {
+      document.querySelector('.hero-content').classList.add('slidein');
+    }, 200);
+
+    // Fade-in on scroll for sections
+    document.addEventListener('DOMContentLoaded', () => {
+      const els = document.querySelectorAll('.section-title, .projects-grid, .twocol, .contact-cards, .contact-form');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) entry.target.classList.add('section-inview');
+        });
+      }, { threshold: 0.18 });
+      els.forEach(el => observer.observe(el));
+    });
+
+    // Animate skill bars
+    setTimeout(() => {
+      document.querySelectorAll('.bar-inner').forEach(bar => {
+        bar.style.width = bar.getAttribute('data-width');
+      });
+    }, 650);
+  </script>
+</body>
+</html>
+
+
